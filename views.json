@@ -1,13 +1,53 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Field Inspections for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Inspection review week",
+    "subtitle": "Fictional demo or your own records. A dated snapshot, not a live application.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Ready for review",
+        "sql": "select code,project,title,due_on,current_evidence,critical_actions from inspection_review where review_state='needs review' order by due_on,code"
+      },
+      {
+        "title": "Overdue actions",
+        "sql": "select code,inspection,title,severity,owner,days_overdue,state from action_register where state<>'verified' and days_overdue>0 order by days_overdue desc,code"
+      }
+    ]
+  },
+  {
+    "name": "coverage",
+    "title": "Project inspection coverage",
+    "sections": [
+      {
+        "title": "Coverage",
+        "sql": "select * from project_coverage order by code"
+      },
+      {
+        "title": "Repeated defects",
+        "sql": "select i.asset,f.defect_type,count(distinct i.id)::int as inspections,count(*)::int as findings from findings f join inspections i on i.id=f.inspection_id group by i.asset,f.defect_type having count(distinct i.id)>1 order by i.asset,f.defect_type"
+      },
+      {
+        "title": "Locations to check",
+        "sql": "select code,title,asset from inspections where latitude is null order by code"
+      }
+    ]
+  },
+  {
+    "name": "assurance",
+    "title": "Evidence and review checks",
+    "sections": [
+      {
+        "title": "Evidence gaps",
+        "sql": "select code,title,revision,current_evidence from inspection_review where current_evidence=0 order by code"
+      },
+      {
+        "title": "Stale reviews",
+        "sql": "select code,title,revision,reviewed_revision from inspections where reviewed_revision is not null and reviewed_revision<>revision order by code"
+      },
+      {
+        "title": "Policy reminders",
+        "sql": "select * from compliance_flags order by record,rule",
+        "note": "Record checks only. These do not certify safety or legal compliance."
       }
     ]
   }

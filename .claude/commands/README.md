@@ -1,5 +1,36 @@
-# Slash commands
+# Inspection jobs
 
-One file per recurring job. Each command tells Claude Code exactly which CLI command to run and how to present the result, so the operator never re-explains the job.
+- /projects
+- /inspections
+- /review-queue
+- /overdue-actions
+- /evidence-gaps
+- /repeat-defects
+- /owner-load
+- /coverage
+- /stale-reviews
+- /location-gaps
+- /compliance
+- /activity
+- /show
+- /weekly-review
+- /add-project
+- /add-inspection
+- /update-inspection
+- /add-finding
+- /assign-action
+- /resolve-action
+- /verify-action
+- /reopen-action
+- /attach-evidence
+- /review-inspection
+- /review-privacy
+- /log
+- /import
+- /export
+- /draft-chaser
+- /draft-report
+- /customise
+- /new-view
 
-Add a command every time the same ask comes twice. Frontmatter needs a `description:` line. The body is the brief.
+All recipes use the same CLI. No emails or messages are sent.

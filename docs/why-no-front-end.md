@@ -1,24 +1,11 @@
-# Why there is no front end
+# Inspection review without an application front end
 
-Fulcrum is a database with a subscription. The tables underneath it are ordinary: a few entities, a few relationships, a handful of workflows you repeat every week. What you pay for is the layer on top that lets people who do not write SQL get at those tables. Screens, filters, dashboards, forms.
+An inspection manager needs to see overdue reviews, repeated defects and missing evidence, then record who will fix each problem. These are database operations. Claude Code, Codex, OpenCode or Cursor runs the documented commands and shows the result.
 
-That layer used to be the whole product, because talking to a database was hard. It is not hard any more. Open this folder in Claude Code, describe what you want, and it writes the query, runs it, and explains the answer. Ask a question the dashboard never had a chart for and you still get an answer.
+npm run view produces read-only HTML snapshots for the week, coverage and assurance. npm run docs produces inspection reports, project action registers and evidence handovers. Change brand.json once for your business name, colours and logo. Print a document to PDF when needed. Reports never update the database.
 
-## What you gain
+A field application provides offline capture, GPS collection, photo upload, maps and synchronisation. This base provides none of those. It is useful as an office inspection record and review system, with observations entered by the CLI or imported from existing files. Teams needing a phone collection workflow must keep that workflow or have Enterprise DNA build and connect it before switching. There is no claim of complete Fulcrum feature parity.
 
-- **Better answers.** A dashboard shows what the vendor decided to chart. Here you ask your own question, in your own words, and get it answered against your own data.
-- **No seats.** Everyone who needs to look can look. The bill does not grow with headcount.
-- **Your data in your Postgres.** Plain tables. Back them up, query them from anything, leave any time. There is no export step because there is nothing to leave.
-- **A process that matches you.** When your way of working changes, you add a command. You do not wait for a feature request to clear.
+The exported HTML contains private business information. Keep it in approved storage. A snapshot shows its generation time and becomes stale when the records change. /new-view adds a report by changing views.json and checking its result. /customise changes the records, rules and tests through a migration.
 
-## What you give up
-
-- **A visual board.** Stages are a table you ask about, not cards you drag.
-- **A phone app.** It runs where Claude Code runs.
-- **A vendor help desk.** This is open source. Enterprise DNA supports the installed version for businesses that want someone to call.
-
-## Who this fits
-
-Small teams who already use Claude Code, or who would rather learn to ask than learn another interface. If your team needs a screen to look at all day, keep Fulcrum. If you need the answers more than the screens, this is cheaper, faster and yours.
-
-Installed and run for you: https://enterprisedna.co/omni/instead-of/fulcrum
+Omni by Enterprise DNA builds the collection connections, access rules or web front end a team needs, and runs the agreed system for one setup fee and then a retainer.

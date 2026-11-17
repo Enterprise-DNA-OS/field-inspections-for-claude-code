@@ -1,115 +1,97 @@
-<h1 align="center">Field Inspections for Claude Code</h1>
+# Field Inspections for Claude Code
 
-<p align="center">
-  <strong>The open-source field inspection system that is just a database and Claude Code.</strong>
-</p>
+See which inspection needs review, which defect keeps returning and which repair still needs an independent check. Keep your inspection records in a database you own.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free under MIT. Install the base and review the fictional demo. | Your inspection fields, review rules, Fulcrum exports and collection connections. One setup fee, then a retainer. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Fulcrum data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=fulcrum">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/fulcrum?utm_source=github&utm_medium=readme&utm_campaign=fulcrum">How it works</a></td>
-  </tr>
-</table>
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fulcrum) · [Instead of Fulcrum](https://enterprisedna.co/omni/instead-of/fulcrum)
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-fulcrum">Instead of Fulcrum</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## Try it
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Field Inspections for Claude Code does the job you pay Fulcrum for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Fulcrum dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Fulcrum per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=fulcrum).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
-
-## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or later:
 
 ```bash
-git clone https://github.com/Enterprise-DNA-OS/field-inspections-for-claude-code.git
-cd field-inspections-for-claude-code
 npm install
 npm run demo
+npm run inspections -- weekly-review
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+Open the folder in Claude Code, Codex, OpenCode or Cursor. CLAUDE.md and AGENTS.md route to the same commands. The embedded PGlite database needs no server. DATABASE_URL selects PostgreSQL. DATA_DIR selects the local storage directory. Never seed a shared production database.
 
-### Use it with your own Postgres or Supabase
+The fictional demo includes a critical outlet blockage, a repeat defect on the same asset, an unassigned action, a resolved action awaiting verification, stale review evidence and a project with no inspections. Relative demo dates keep attention reports useful. Seeding twice preserves existing records.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## What this version does
 
-## The commands
+An office inspection and corrective-action system: projects, asset observations, locations, review deadlines, repeatable findings, evidence hashes and change history. It is useful with entered observations or existing exports. Mobile collection, offline synchronisation and mapping connections are separately scoped work before replacing a field team's application. [What a screen provides](docs/why-no-front-end.md).
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+The annual bill scenario is US$33,000 for 50 Fulcrum Elite users at its published US$55 per user per month. That is list-price arithmetic, not a customer invoice or a quote. Vendor plans require annual subscription and at least five users. [Pricing source](https://www.fulcrumapp.com/pricing/) and [candidate research](docs/research.md), checked 17 November 2026.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+## Weekly work
 
-## Instead of Fulcrum
+Monday: /weekly-review combines the review queue, overdue actions and project coverage. Each day: /review-queue, /overdue-actions, /evidence-gaps, /repeat-defects and /owner-load. Before accepting a report: /stale-reviews and /compliance. /draft-chaser and /draft-report prepare working files and never send.
 
-<!-- TODO(author): how to bring data across from Fulcrum; link docs/replace-fulcrum.md -->
+31 CLI commands and 32 slash-command recipes. Run npm run inspections -- help for every command. All commands accept --json. Flags use --name=value. Writes require --actor. Exact codes, partial IDs and case-insensitive names work. Ambiguous references list the candidates and exit with failure. Unknown flags fail, including misspelled dry-run flags. Full examples live in .claude/commands/.
 
-## Architecture
+## Review gates
 
+Resolving an action requires an owner and evidence. Verification requires a different named operator. An inspection review requires evidence attached to its current revision, a named assessor, a different reviewer and all critical findings verified. Editing observations or changing actions increments the parent revision. Earlier review and evidence then become stale.
+
+File evidence stores a SHA-256 hash and a controlled-storage reference. Source bytes stay in your storage. Actor names are operator-supplied labels, not authenticated identities. Database owners can alter the records. This is an operational record system, not a tamper-proof audit service or safety certification. [Policy checks and cited rules](docs/compliance.md).
+
+## Ten questions this build answers today
+
+Fulcrum already provides reporting and a query service. These are tested questions in your version, not claims of exclusive capability.
+
+1. Which inspections need review, and which have unresolved critical findings? review-queue.
+2. Which repairs are overdue even though someone marked them resolved? overdue-actions.
+3. Which inspections have no evidence for the current revision? evidence-gaps.
+4. Which defect type has returned on the same asset across inspections? repeat-defects.
+5. Who owns the most overdue work, including unassigned actions? owner-load.
+6. Which programmes have no recorded inspections? coverage.
+7. Which reviews became stale after records changed? stale-reviews.
+8. Which inspection locations are still missing? location-gaps.
+9. Which projects need an access or retention policy review? compliance.
+10. Who changed a finding, and what did it say before? activity.
+
+## Bring your Fulcrum history
+
+Create a destination project, then import a parent CSV and optional findings CSV in one command:
+
+```bash
+npm run inspections -- import fulcrum --project=NORTH --app=drainage --file=imports/inspections.csv --findings=imports/findings.csv --map=imports/field-map.json --actor="Your name" --dry-run --json
 ```
-field-inspections-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+Remove --dry-run for the real load. The importer preserves source IDs, child relationships and every raw field. It rejects duplicates, orphan children and invalid dates or coordinates. Changed source records require --update. Imported completion labels do not approve local work. Both parent and child files commit together or roll back together. [Export, mapping and reconciliation guide](docs/replace-fulcrum.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Your paperwork and views
 
-## Contributing
+Change brand.json for the business name, colours and logo. npm run docs produces an inspection report per inspection, a corrective-action register per project and an evidence handover manifest per project. npm run view produces three read-only snapshots: the week, coverage and assurance. The files stay local and are ignored by Git. /new-view adds a report to views.json.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+## Your first hour: ten things to ask for
 
-## Want it installed and run for you?
+1. Put our name and logo on the inspection reports.
+2. Test-import one Fulcrum inspection app.
+3. Map our repeatable defect section separately.
+4. Show all critical findings awaiting verification.
+5. Add our inspection method reference field.
+6. Change our owner assignment rules.
+7. Show repeated defects by asset and month.
+8. Add a report for the engineering reviewer.
+9. Draft follow-up notes for overdue actions.
+10. Set our access and retention review dates.
 
-Enterprise DNA installs Field Inspections for Claude Code for your business, migrates your Fulcrum data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+/customise writes a migration, applies it and updates the commands and tests. No application front end is required for the record and review jobs.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fulcrum)
-- Read more: [enterprisedna.co/omni/instead-of/fulcrum](https://enterprisedna.co/omni/instead-of/fulcrum?utm_source=github&utm_medium=readme&utm_campaign=fulcrum)
+## Verification and deployment
 
-## License
+npm test uses an isolated temporary database. It migrates and seeds twice, exercises every CLI command, checks independent review gates, stale evidence, repeat import behaviour, mapping, rollback, CSV edge cases, exports, drafts and escaped HTML. CI is configured for Node 20/22 on Windows and Linux, plus PostgreSQL 17. Check actual CI results before claiming a platform passed. TEST_DATABASE_URL must point to an empty disposable database.
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+Use a trusted operator role. Public access is revoked and domain records have row-level security enabled, with no public policies. The database owner can access everything; configure real authentication and access rules before sharing. Keep private exports, drafts, media and connection details out of Git. Hosting, backups and coding-agent usage have their own costs.
+
+Enterprise DNA brings across the agreed Fulcrum records, adds your rules and documents, scopes mobile collection or a web front end, and runs your version through Omni by Enterprise DNA for one setup fee and then a retainer. [Book 30 minutes with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fulcrum).
+
+MIT. Not affiliated with Fulcrum or Anthropic.

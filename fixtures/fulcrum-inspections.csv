@@ -1,0 +1,4 @@
+fulcrum_id,title,asset,assessor,observed_on,due_on,latitude,longitude,status,extra_note
+export-01,Pump station inspection,PS-01,Jo Example,2026-11-01,2026-11-30,-36.8,174.7,Complete,"Original, retained"
+export-02,Pump station inspection two,PS-02,Jo Example,2026-11-02,2026-11-30,,,Pending,"Line one
+Line two"

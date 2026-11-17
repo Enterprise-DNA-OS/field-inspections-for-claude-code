@@ -1,32 +1,10 @@
-#!/usr/bin/env node
-// Loads the demo data (supabase/seed.sql). Write seed.sql so a second run does nothing:
-// wrap it in a do $$ block that returns early when a known demo row already exists.
-import { readFileSync } from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { getDb, REPO_ROOT } from './lib/db.mjs';
-
-export async function seed(db) {
-  await db.exec('BEGIN');
-  try {
-    await db.exec(readFileSync(path.join(REPO_ROOT, 'supabase', 'seed.sql'), 'utf8'));
-    await db.exec('COMMIT');
-  } catch (error) {
-    await db.exec('ROLLBACK');
-    throw error;
-  }
+import {pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {getDb,REPO_ROOT} from './lib/db.mjs';
+export async function seed(db){
+ const hash=createHash('sha256').update(fs.readFileSync(path.join(REPO_ROOT,'fixtures/site-note.txt'))).digest('hex');
+ await db.exec('BEGIN');try{await db.exec(fs.readFileSync(path.join(REPO_ROOT,'supabase/seed.sql'),'utf8').replaceAll('SEED_HASH',hash));await db.exec('COMMIT');}catch(e){await db.exec('ROLLBACK');throw e;}
 }
-
-const isMain = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
-if (isMain) {
-  const db = await getDb();
-  try {
-    if (db.mode === 'postgres' && !process.argv.includes('--demo-database')) {
-      throw new Error('Shared database seed requires --demo-database. Use only an empty disposable demo database.');
-    }
-    await seed(db);
-    console.log(`seed: demo data ready (${db.mode})`);
-  } finally {
-    await db.close();
-  }
-}
+if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){const db=await getDb();try{await seed(db);console.log('seed: fictional inspection records ready');}finally{await db.close();}}

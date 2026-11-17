@@ -1,11 +1,52 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "inspection-report",
+    "title": "Inspection review report",
+    "for_each": "select id,code from inspections order by code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Inspection",
+        "layout": "record",
+        "sql": "select code,title,asset,assessor,observed_on,due_on,revision,reviewed_revision,reviewer,review_note from inspections where id=$1"
+      },
+      {
+        "title": "Corrective actions",
+        "sql": "select code,title,severity,owner,due_on,state from findings where inspection_id=$1 order by code"
+      },
+      {
+        "title": "Evidence references",
+        "sql": "select revision,reference,sha256,actor from evidence where inspection_id=$1 order by created_at",
+        "note": "References point to separately held files. A stored hash does not certify the contents."
+      }
+    ]
+  },
+  {
+    "name": "action-register",
+    "title": "Project corrective action register",
+    "for_each": "select id,code from projects order by code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Actions and verification",
+        "sql": "select f.code,i.asset,f.title,f.owner,f.due_on,f.state,f.resolution,f.verification from findings f join inspections i on i.id=f.inspection_id where i.project_id=$1 order by f.due_on,f.code"
+      }
+    ]
+  },
+  {
+    "name": "evidence-handover",
+    "title": "Inspection evidence handover",
+    "for_each": "select id,code from projects order by code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Inspection review status",
+        "sql": "select code,title,revision,reviewed_revision,reviewer from inspections where project_id=$1 order by code"
+      },
+      {
+        "title": "Evidence manifest",
+        "sql": "select i.code,e.revision,e.reference,e.sha256 from evidence e join inspections i on i.id=e.inspection_id where i.project_id=$1 order by i.code,e.revision"
+      }
     ]
   }
 ]

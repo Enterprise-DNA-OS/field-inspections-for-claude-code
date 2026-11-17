@@ -1,0 +1,2 @@
+fulcrum_id,fulcrum_parent_id,title,defect_type,severity,owner,due_on,status
+child-01,export-01,Loose cover,cover,high,Jo Example,2026-11-30,Complete
