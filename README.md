@@ -6,7 +6,7 @@ See which inspection needs review, which defect keeps returning and which repair
 |---|---|---|
 | Free under MIT. Install the base and review the fictional demo. | Your inspection fields, review rules, Fulcrum exports and collection connections. One setup fee, then a retainer. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fulcrum) · [Instead of Fulcrum](https://enterprisedna.co/omni/instead-of/fulcrum)
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fulcrum) · [Instead of Fulcrum](https://enterprisedna.co/omni/instead-of/fulcrum?utm_source=github&utm_medium=readme&utm_campaign=fulcrum)
 
 ## Try it
 
